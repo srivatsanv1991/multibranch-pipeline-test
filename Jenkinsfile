@@ -21,6 +21,13 @@ steps{
 sh 'npm install'
 }
 }
+stage ('Deploy'){
+            steps{
+                sh 'HTTPS=true npm start & > log.txt'
+                input message: 'If you have finished accessing the wesbite? (click "Proceed")'
+            }
+        }
+
 
 
 
