@@ -21,7 +21,11 @@ steps{
 sh 'npm install'
 }
 }
-stage ('Deploy'){
+stage ('Deliver for development'){
+
+when {
+branch 'development'
+}
             steps{
                 sh 'HTTPS=true npm start & > log.txt'
                 input message: 'If you have finished accessing the wesbite? (click "Proceed")'
@@ -29,6 +33,16 @@ stage ('Deploy'){
         }
 
 
+stage ('Deliver for production'){
+
+when {
+branch 'production'
+}
+            steps{
+                sh 'HTTPS=true npm start & > log.txt'
+                input message: 'If you have finished accessing the wesbite? (click "Proceed")'
+            }
+        }
 
 
 }
